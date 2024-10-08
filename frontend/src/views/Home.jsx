@@ -7,7 +7,7 @@ export const Home = () => {
 
   useEffect(() => {
     // Obtener la lista de países desde la API
-    axios.get(`${import.meta.env.VITE_API_URL}/countries`)
+    axios.get(`${import.meta.env.VITE_API_URL}/available`)
       .then(response => {
         setCountries(response.data);
       })
