@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Spinner } from '../components/Spinner';
 
 export const Home = () => {
   const [countries, setCountries] = useState([]);
@@ -19,8 +20,8 @@ console.log(countries)
   return (
     <>
       <div className="container mx-auto p-2 flex flex-col justify-center items-center">
-        <h1 className="text-5xl font-bold m-4">Bienvenidos</h1>
-        <h2 className="text-3xl m-4">Selecciona un país debajo</h2>
+        <h1 className="text-5xl font-bold m-4">Welcome</h1>
+        <h2 className="text-3xl m-4">Select a country from the list</h2>
       </div>
       <section className="container mx-auto p-2 flex flex-col justify-center items-center">
         {countries.length > 0 ? (
@@ -34,7 +35,7 @@ console.log(countries)
             ))}
           </ul>
         ) : (
-          <p>Cargando países...</p>
+          <Spinner/>
         )}
       </section>
     </>

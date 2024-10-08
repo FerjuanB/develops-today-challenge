@@ -15,7 +15,7 @@ export const PopulationChart = ({ populationData }) => {
     labels: labels,
     datasets: [
       {
-        label: 'Población a lo largo del tiempo',
+        label: 'Population over time',
         data: populations,
         fill: false,
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -27,7 +27,6 @@ export const PopulationChart = ({ populationData }) => {
 
   return (
     <div>
-      <h2>Población Histórica</h2>
       <Line data={data} />
     </div>
   );
