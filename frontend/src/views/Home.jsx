@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Home = () => {
   const [countries, setCountries] = useState([]);
-
+console.log(countries)
   useEffect(() => {
     // Obtener la lista de países desde la API
     axios.get(`${import.meta.env.VITE_API_URL}/available`)
@@ -26,8 +26,8 @@ export const Home = () => {
         {countries.length > 0 ? (
           <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {countries.map((country) => (
-              <li key={country.alpha2Code} className="border p-4 shadow-lg text-center">
-                <Link to={`/country/${country.alpha2Code}`} className="text-xl font-semibold">
+              <li key={country.Code} className="border p-4 shadow-lg text-center">
+                <Link to={`/country/${country.countryCode}`} className="text-xl font-semibold">
                   {country.name}
                 </Link>
               </li>

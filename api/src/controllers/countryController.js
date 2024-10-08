@@ -9,35 +9,41 @@ const getAvailableCountries = async (req, res) => {
   }
 };
 
- const getCountryInfo = async (req, res) => {
+const getCountryInfo = async (req, res) => {
   const countryCode = req.params.countryCode;
-
+  
   try {
-    // 1. Obtener fronteras
+    // 1. Obtener fronteras y nombres del país
     const bordersResponse = await axios.get(`https://date.nager.at/api/v3/CountryInfo/${countryCode}`);
-    const borders = bordersResponse.data.borders;
-
+    const { commonName, officialName, borders } = bordersResponse.data;
+    
     // 2. Obtener datos de población histórica
     const populationResponse = await axios.post('https://countriesnow.space/api/v0.1/countries/population', {
-      country: bordersResponse.data.commonName
+      country: commonName
     });
     const populationData = populationResponse.data.data.populationCounts;
-
+    
     // 3. Obtener URL de la bandera
     const flagResponse = await axios.post('https://countriesnow.space/api/v0.1/countries/flag/images', {
-      country: bordersResponse.data.commonName
+      country: commonName
     });
     const flagUrl = flagResponse.data.data.flag;
-
+    
+    // Respuesta final con todos los datos
     res.json({
+      commonName,
+      officialName,
       borders,
       populationData,
-      flagUrl,
+      flagUrl
     });
+    
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching country info' });
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching country information.' });
   }
 };
+
 
 module.exports = {
   getAvailableCountries,
