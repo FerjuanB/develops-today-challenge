@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import {PopulationChart} from '../components/PopulationChart';
 
 export const CountryInfo = () => {
   const { countryCode } = useParams();
@@ -37,8 +38,8 @@ export const CountryInfo = () => {
           </div>
           <div>
             <h2 className="text-2xl font-semibold mt-6">Población Histórica</h2>
-            {/* Implementación de la gráfica de población más adelante */}
-          </div>
+            <PopulationChart populationData={countryInfo.populationData} />
+              </div>
         </>
       ) : (
         <p>Cargando información del país...</p>
